@@ -33,5 +33,13 @@ services:
         "/app/start.sh"
       ]
     command: [ "/app/main" ]
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
 volumes:
   data-volume:
