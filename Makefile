@@ -42,11 +42,8 @@ sqlc:
 test:
 	go test -v -cover -short ./...
 
-TEST_POSTGRES_PORT ?= 5433
-
 dockertest:
-	docker compose -f docker-compose.test.yaml run --rm migrate
-	DB_SOURCE="postgresql://root:secret@localhost:$(TEST_POSTGRES_PORT)/simple_bank?sslmode=disable" go test -v -cover -short ./... ; \
+	docker compose -f docker-compose.test.yaml run --rm test ; \
 	docker compose -f docker-compose.test.yaml down
 
 server:
