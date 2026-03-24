@@ -19,7 +19,6 @@ import (
 	"github.com/rs/cors"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-	"github.com/techschool/simplebank/api"
 	db "github.com/techschool/simplebank/db/sqlc"
 	_ "github.com/techschool/simplebank/doc/statik"
 	"github.com/techschool/simplebank/gapi"
@@ -256,16 +255,4 @@ func runGatewayServer(
 		log.Info().Msg("HTTP gateway server is stopped")
 		return nil
 	})
-}
-
-func runGinServer(config util.Config, store db.Store) {
-	server, err := api.NewServer(config, store)
-	if err != nil {
-		log.Fatal().Err(err).Msg("cannot create server")
-	}
-
-	err = server.Start(config.HTTPServerAddress)
-	if err != nil {
-		log.Fatal().Err(err).Msg("cannot start server")
-	}
 }

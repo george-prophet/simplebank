@@ -42,6 +42,11 @@ sqlc:
 test:
 	go test -v -cover -short ./...
 
+dockertest:
+	docker compose -f docker-compose.test.yaml run --rm migrate
+	go test -v -cover -short ./... ; \
+	docker compose -f docker-compose.test.yaml down
+
 server:
 	go run main.go
 
@@ -65,4 +70,4 @@ evans:
 redis:
 	docker run --name redis -p 6379:6379 -d redis:7-alpine
 
-.PHONY: network postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 new_migration db_docs db_schema sqlc test server mock proto evans redis
+.PHONY: network postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 new_migration db_docs db_schema sqlc test dockertest server mock proto evans redis
