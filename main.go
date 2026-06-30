@@ -222,7 +222,7 @@ func runGatewayServer(
 		},
 		AllowCredentials: true,
 	})
-	handler := c.Handler(gapi.HttpLogger(mux))
+	handler := c.Handler(gapi.HttpLogger(gapi.NewRateLimiter(config, mux)))
 
 	httpServer := &http.Server{
 		Handler: handler,

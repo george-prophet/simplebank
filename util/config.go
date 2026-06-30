@@ -22,6 +22,9 @@ type Config struct {
 	EmailSenderName      string        `mapstructure:"EMAIL_SENDER_NAME"`
 	EmailSenderAddress   string        `mapstructure:"EMAIL_SENDER_ADDRESS"`
 	EmailSenderPassword  string        `mapstructure:"EMAIL_SENDER_PASSWORD"`
+	RateLimitEnabled     bool          `mapstructure:"RATE_LIMIT_ENABLED"`
+	RateLimitRequests    int64         `mapstructure:"RATE_LIMIT_REQUESTS"`
+	RateLimitWindow      time.Duration `mapstructure:"RATE_LIMIT_WINDOW"`
 }
 
 // LoadConfig reads configuration from file or environment variables.
